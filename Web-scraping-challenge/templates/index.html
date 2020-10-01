@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Working HTML</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<style>
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .container .image {
+    width: 50%;
+  }
+  
+  .container img {
+    width: calc(100% - (20px * 2));
+    margin: 20px;
+  }
+  </style>
+
+<body>
+  <div clas="container-fluid" style="background-color:aliceblue;">
+    <div class="jumbotron text-center">
+      <h1><strong>Mission to Mars</strong></h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get the latest Mars data</a></p>
+    </div>
+      
+    <!-- surf data -->
+    <div class="row">
+      <div class="col-md-8 col-md-offset-1">
+        <h2>Mars News</h2>
+        <h3>{{marsinfo.news_header}}</h3>
+        <p>{{marsinfo.news_text}}</p>
+      </div>
+    </div>
+
+    <!-- MARS IMAGE -->
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-1">
+          <h2>Featured Mars Image</h2>
+          <img class="img-responsive" src="{{marsinfo.featured_image_url}}" alt="Featured Mars Image">
+        </div>
+      <!-- MARS FACTS -->    
+      <div class="col-md-4 col-md-offset-1">
+        <h2>Mars Facts</h2>
+        {{marsinfo.marsfacts_html | safe}}
+      </div>
+
+    </div>
+    
+
+    <!-- MARS HEMISHPHERES -->
+
+    <div class="row">
+        <h2 style="text-align: center;"><strong>Mars Hemispheres</strong></h2>
+    </div>
+
+    <div class="row">
+            {% for image_url in  marsinfo.hemisphere_image_urls %}
+            <div class="col-md-6 ">
+              <div class="container">
+                <div class="col-md-8 col-md-offset-1">
+                  <div id ="images">
+                    <h3>{{image_url.title}}</h3>
+                    <img src={{image_url.img_url}} alt={{image_url.img_url}} class="figures">
+                </div>
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+    </div>
+
+
+
+    
+
+
+
+    </div>
+
+
+
+</body>
+</html>
+
